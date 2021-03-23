@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class CursomcApplication implements CommandLineRunner {
     @Autowired
     private CategoriaRepository categoriaRepository;
-    
+
     public static void main(String[] args) {
         SpringApplication.run(CursomcApplication.class, args);
     }
