@@ -2,6 +2,7 @@ package com.matheusmoura.cursomc.services;
 
 import com.matheusmoura.cursomc.domain.Categoria;
 import com.matheusmoura.cursomc.repositories.CategoriaRepository;
+import com.matheusmoura.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,11 @@ public class CategoriaService {
     private CategoriaRepository repo;
 
     public Categoria buscar(Integer id){
-        Optional<Categoria> obj = repo.findById(id);
-        return obj.orElse(null);
+        Categoria obj = repo.findById(id).orElseThrow(
+                () -> new ObjectNotFoundException("Objeto não encontrado ! Id: " + id
+                        + ", Tipo: " + Categoria.class.getName())
+        );
+
+        return obj;
     }
 }
